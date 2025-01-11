@@ -1,0 +1,6 @@
+---
+collections:
+  - name: google.cloud
+    version: "2.0.0" 
+  - name: ansible.builtin  # If you plan to use built-in modules like `debug`, `copy`, etc.
+    version: "1.0.0"  # Optional, or you can omit the version if you want the latest

@@ -1,0 +1,6 @@
+- include_tasks: generate_ssh_key.yml
+- include_tasks: create_network.yml
+- include_tasks: create_address.yml
+- include_tasks: create_instance.yml
+- include_tasks: configure_firewall.yml
+- include_tasks: verify.yml

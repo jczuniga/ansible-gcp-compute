@@ -1,0 +1,24 @@
+- name: Create GCP Compute Instance
+  google.cloud.gcp_compute_instance:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    zone: "{{ zone }}"
+    name: "{{ instance_name }}"
+    machine_type: "{{ machine_type }}"
+    disks:
+      - auto_delete: true
+        boot: true
+        initialize_params:
+          source_image: "{{ disk_image }}"
+          disk_size_gb: "{{ disk_size }}"
+          disk_type: "{{ disk_type }}"
+    network_interfaces:
+      - network: "{{ network }}"
+        access_configs:
+          - name: External NAT
+            nat_ip: "{{ address }}"
+            type: ONE_TO_ONE_NAT
+    metadata:
+      ssh-keys: "root:{{ lookup('file', ssh_key_path + '.pub') }}"
+    state: present

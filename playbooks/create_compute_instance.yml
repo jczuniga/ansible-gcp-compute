@@ -1,0 +1,4 @@
+- name: Create and Configure GCP Compute Instance
+  hosts: localhost
+  roles:
+    - gcp_instance

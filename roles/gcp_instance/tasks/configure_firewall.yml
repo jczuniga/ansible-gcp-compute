@@ -1,0 +1,12 @@
+- name: Open firewall ports
+  google.cloud.gcp_compute_firewall:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    name: "{{ instance_name }}-firewall"
+    network: "{{ network }}"
+    allowed:
+      - ip_protocol: tcp
+        ports: "{{ firewall_ports }}"
+    source_ranges: ["0.0.0.0/0"]
+    state: present

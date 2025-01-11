@@ -1,0 +1,17 @@
+- name: Create .ssh directory
+  ansible.builtin.file:
+    path: "{{ ssh_key_path | dirname }}"
+    state: directory
+    mode: '0755'
+
+- name: Generate SSH Key Pair if not exists
+  ansible.builtin.command:
+    cmd: ssh-keygen -t rsa -b 4096 -f "{{ ssh_key_path }}" -q -N ""
+  args:
+    creates: "{{ ssh_key_path }}"
+  register: ssh_keygen_result
+
+- name: Read SSH Public Key
+  ansible.builtin.slurp:
+    src: "{{ ssh_key_path }}.pub"
+  register: ssh_pub_key_content

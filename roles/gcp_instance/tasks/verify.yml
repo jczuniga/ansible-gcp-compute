@@ -1,0 +1,17 @@
+# Verify Configuration
+- name: Retrieve Instance Details
+  google.cloud.gcp_compute_instance_info:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    zone: "{{ zone }}"
+    filters:
+      - name = "{{ instance_name }}"
+  register: instance_info
+
+- name: Log Instance Information
+  ansible.builtin.debug:
+    msg: >-
+      Instance Name: {{ instance_info.resources[0].name }},
+      Private IP: {{ instance_info.resources[0].networkInterfaces[0].networkIP }},
+      External IP: {{ instance_info.resources[0].networkInterfaces[0].accessConfigs[0].natIP }}
