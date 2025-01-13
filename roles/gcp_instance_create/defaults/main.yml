@@ -1,13 +1,15 @@
 project_id: "dkanswers-6e06b"
 zone: "us-central1-a"
-instance_name: "e2-prod-instance-test"
-machine_type: "e2-custom-8-12288"     # 8vCPU, 12GB memory
+instance_name: "prod-styholdings-net"
+hostname: "prod.styholdings.net"
+machine_type: "e2-custom-8-12288"
+deletion_protection: false
 disk_size: 10
 disk_type: "pd-standard"
 disk_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-2404-lts-amd64"
 ssh_key_path: "/Users/syacko/.ssh/prod-sty-holdings-net-scott-yack"
 service_account_file: "{{ role_path }}/files/credentials.json"
-firewall_ports:
-  - "22"
-  - "4222"
-  - "9222"
+root_user: "scott-yacko"
+firewall_ssh_port: "22"
+firewall_nats_port: "4222"
+firewall_nats_websocket_port: "9222"

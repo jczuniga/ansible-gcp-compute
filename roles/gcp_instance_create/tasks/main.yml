@@ -2,5 +2,7 @@
 - include_tasks: create_network.yml
 - include_tasks: create_address.yml
 - include_tasks: create_instance.yml
-- include_tasks: configure_firewall.yml
+- include_tasks: configure_firewall_ssh.yml
+- include_tasks: configure_firewall_nats.yml
+- include_tasks: configure_firewall_websocket.yml
 - include_tasks: verify.yml

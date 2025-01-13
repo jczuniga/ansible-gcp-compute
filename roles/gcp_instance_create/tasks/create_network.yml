@@ -1,6 +1,6 @@
 - name: Create a network
   google.cloud.gcp_compute_network:
-    name: "{{ instance_name }}-network"
+    name: "{{ instance_name }}"
     project: "{{ project_id }}"
     auto_create_subnetworks: true
     auth_kind: serviceaccount

@@ -1,0 +1,6 @@
+- include_tasks: delete_firewall_ssh.yml
+- include_tasks: delete_firewall_nats.yml
+- include_tasks: delete_firewall_websocket.yml
+- include_tasks: delete_instance.yml
+- include_tasks: delete_address.yml
+- include_tasks: delete_network.yml

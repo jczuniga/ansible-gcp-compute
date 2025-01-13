@@ -1,12 +1,14 @@
-- name: Open firewall ports
+- name: Open NATS port
   google.cloud.gcp_compute_firewall:
     auth_kind: serviceaccount
     service_account_file: "{{ service_account_file }}"
     project: "{{ project_id }}"
-    name: "{{ instance_name }}-firewall"
+    name: "{{ instance_name }}-allow-nats"
     network: "{{ network }}"
     allowed:
       - ip_protocol: tcp
-        ports: "{{ firewall_ports }}"
-    source_ranges: ["0.0.0.0/0"]
+        ports: 
+          - "{{ firewall_nats_port }}"
+    source_ranges: 
+      - "0.0.0.0/0"
     state: present

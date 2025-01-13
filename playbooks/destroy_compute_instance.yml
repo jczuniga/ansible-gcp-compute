@@ -1,0 +1,4 @@
+- name: Destroy GCP Compute Instance
+  hosts: localhost
+  roles:
+    - gcp_instance_destroy

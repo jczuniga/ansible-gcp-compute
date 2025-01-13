@@ -1,0 +1,4 @@
+project_id: "dkanswers-6e06b"
+zone: "us-central1-a"
+instance_name: "prod-styholdings-net"
+service_account_file: "{{ role_path }}/files/credentials.json"

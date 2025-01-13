@@ -6,6 +6,8 @@
     zone: "{{ zone }}"
     name: "{{ instance_name }}"
     machine_type: "{{ machine_type }}"
+    hostname: "{{ hostname }}"
+    deletion_protection: "{{ deletion_protection | bool }}"
     disks:
       - auto_delete: true
         boot: true
@@ -20,5 +22,5 @@
             nat_ip: "{{ address }}"
             type: ONE_TO_ONE_NAT
     metadata:
-      ssh-keys: "root:{{ lookup('file', ssh_key_path + '.pub') }}"
+      ssh-keys: "{{ root_user }}:{{ lookup('file', ssh_key_path + '.pub') }}"
     state: present

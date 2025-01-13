@@ -1,0 +1,9 @@
+- name: Delete the reserved IP address
+  google.cloud.gcp_compute_address:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    region: "{{ zone.split('-')[0] }}-{{ zone.split('-')[1] }}"
+    name: "{{ instance_name }}"
+    state: absent
+  when: instance_name is defined

@@ -1,6 +1,6 @@
 - name: Create a static IP address
   google.cloud.gcp_compute_address:
-    name: "{{ instance_name }}-address"
+    name: "{{ instance_name }}"
     region: "{{ zone.split('-')[0] }}-{{ zone.split('-')[1] }}"
     project: "{{ project_id }}"
     auth_kind: serviceaccount

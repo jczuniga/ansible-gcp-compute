@@ -1,0 +1,8 @@
+- name: Delete the network
+  google.cloud.gcp_compute_network:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    name: "{{ instance_name }}"
+    state: absent
+  when: instance_name is defined

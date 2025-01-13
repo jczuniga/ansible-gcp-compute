@@ -163,10 +163,9 @@ disk_type: "pd-standard"
 disk_image: "projects/ubuntu-os-cloud/global/images/family/ubuntu-2404-lts-amd64"
 ssh_key_path: "/Users/syacko/.ssh/prod-sty-holdings-net-scott-yack"
 service_account_file: "{{ role_path }}/files/credentials.json"
-firewall_ports:
-  - "22"
-  - "4222"
-  - "9222"`
+firewall_ports_ssh: "22"
+firewall_ports_nats: "4222"
+firewall_ports_nats_websocket: "9222"
 
 ### Modifying Variables:
 
@@ -175,4 +174,96 @@ You can override any of these variables when running the playbook. For example, 
 
 `ansible-playbook -i inventory/hosts playbooks/create_compute_instance.yml -e "project_id=my-project-id zone=us-west1-b"`
 
-This allows for greater flexibility and customization of your deployment process.
+
+Running with Bash Scripts
+=======================================
+
+This repository contains two bash scripts for managing GCP Compute Instances using Ansible.
+
+1.  `create_gcp_instance.sh` - Used to create and configure a GCP Compute Instance.
+2.  `destroy_gcp_instance.sh` - Used to destroy a GCP Compute Instance.
+
+Both scripts are designed to be used with Ansible playbooks for creating and destroying Compute Instances on Google Cloud Platform (GCP).
+
+* * * * *
+
+Prerequisites
+-------------
+
+Before using these scripts, ensure the following:
+
+-   You have **Ansible** installed on your machine.
+-   You have the **Google Cloud SDK** installed and configured with a GCP project.
+-   You have a **service account JSON key file** for GCP with the necessary permissions for managing Compute Instances.
+
+* * * * *
+
+Script 1: `create_gcp_instance.sh`
+----------------------------------
+
+### Description
+
+This script is used to create and configure a GCP Compute Instance using an Ansible playbook.
+
+### Usage
+
+`./create_gcp_instance.sh [--protect=true|false] [--credentials=/path/to/service-account.json] [--ssh_key_path=/path/to/ssh-key.pem]`
+
+### Parameters
+
+-   `--protect=true|false`: (Optional) Set **deletion protection** for the instance. Default is `false`.
+-   `--credentials=/path/to/service-account.json`: (Required) Path to the service account JSON key file used for authentication with GCP.
+-   `--ssh_key_path=/path/to/ssh-key.pem`: (Optional) Path to the SSH key used for connecting to the instance.
+
+### Example
+
+Create a GCP Compute Instance with deletion protection enabled:
+
+
+`./create_gcp_instance.sh --protect=true --credentials=/path/to/service-account.json --ssh_key_path=/path/to/ssh-key.pem`
+
+* * * * *
+
+Script 2: `destroy_gcp_instance.sh`
+-----------------------------------
+
+### Description
+
+This script is used to destroy (delete) a GCP Compute Instance using an Ansible playbook.
+
+### Usage
+
+
+`./destroy_gcp_instance.sh [--credentials=/path/to/service-account.json]`
+
+### Parameters
+
+-   `--credentials=/path/to/service-account.json`: (Required) Path to the service account JSON key file used for authentication with GCP.
+
+### Example
+
+Destroy a GCP Compute Instance:
+
+
+`./destroy_gcp_instance.sh --credentials=/path/to/service-account.json`
+
+* * * * *
+
+Ansible Playbook Structure
+--------------------------
+
+Both scripts reference specific Ansible playbooks to perform the tasks.
+
+-   **For Creating Instances**: `playbooks/create_compute_instance.yml`
+-   **For Destroying Instances**: `playbooks/destroy_compute_instance.yml`
+
+Ensure that these playbooks are configured correctly for your GCP setup.
+
+* * * * *
+
+Troubleshooting
+---------------
+
+-   Ensure that the provided `service-account.json` file has the correct IAM permissions to manage GCP Compute Instances.
+-   Double-check the `ssh_key_path` to ensure the SSH key exists and has proper permissions for access.
+-   If any errors occur with Ansible, check the output logs for more details and ensure that your Ansible environment is properly configured.

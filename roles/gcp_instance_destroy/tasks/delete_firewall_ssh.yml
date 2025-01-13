@@ -1,0 +1,8 @@
+- name: Delete NATS firewall rule
+  google.cloud.gcp_compute_firewall:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    name: "{{ instance_name }}-allow-ssh"
+    state: absent
+  when: instance_name is defined

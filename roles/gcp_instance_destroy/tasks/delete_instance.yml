@@ -1,0 +1,9 @@
+- name: Delete the compute instance
+  google.cloud.gcp_compute_instance:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    zone: "{{ zone }}"
+    name: "{{ instance_name }}"
+    state: absent
+  when: instance_name is defined

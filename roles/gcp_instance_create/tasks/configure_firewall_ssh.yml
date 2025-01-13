@@ -1,0 +1,14 @@
+- name: Open SSH port
+  google.cloud.gcp_compute_firewall:
+    auth_kind: serviceaccount
+    service_account_file: "{{ service_account_file }}"
+    project: "{{ project_id }}"
+    name: "{{ instance_name }}-allow-ssh"
+    network: "{{ network }}"
+    allowed:
+      - ip_protocol: tcp
+        ports: 
+          - "{{ firewall_ssh_port }}"
+    source_ranges: 
+      - "0.0.0.0/0"
+    state: present
