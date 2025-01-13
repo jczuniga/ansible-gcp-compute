@@ -207,20 +207,20 @@ This script is used to create and configure a GCP Compute Instance using an Ansi
 
 ### Usage
 
-`./create_gcp_instance.sh [--protect=true|false] [--credentials=/path/to/service-account.json] [--ssh_key_path=/path/to/ssh-key.pem]`
+`./create_gcp_instance.sh [--protect=true|false] [--credentials=/path/to/service-account.json] [--ssh_key_path=/path/to/ssh-key]`
 
 ### Parameters
 
 -   `--protect=true|false`: (Optional) Set **deletion protection** for the instance. Default is `false`.
 -   `--credentials=/path/to/service-account.json`: (Required) Path to the service account JSON key file used for authentication with GCP.
--   `--ssh_key_path=/path/to/ssh-key.pem`: (Optional) Path to the SSH key used for connecting to the instance.
+-   `--ssh_key_path=/path/to/ssh-key`: (Optional) Path to the SSH key used for connecting to the instance.
 
 ### Example
 
 Create a GCP Compute Instance with deletion protection enabled:
 
 
-`./create_gcp_instance.sh --protect=true --credentials=/path/to/service-account.json --ssh_key_path=/path/to/ssh-key.pem`
+`./create_gcp_instance.sh --protect=true --credentials=/path/to/service-account.json --ssh_key_path=/path/to/ssh-key
 
 * * * * *
 
